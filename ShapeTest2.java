@@ -2,28 +2,37 @@ package com.bilgeadam.boost.Marathon01;
 
 import java.util.Scanner;
 
-public class ShapeTest {
+// layout test for ShapeTest.java
+// with english printouts
+
+public class ShapeTest2 {
+	int firstEdge;
+	int secondEdge;
+	int thirdEgde;
+	int fourthEdge;
+	int shape;
 	static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		ShapeTest shapeTest = new ShapeTest();
+		ShapeTest2 shapeTest = new ShapeTest2();
 		shapeTest.readInput();
 		System.out.println("Bye....");
 	}
 
 	private void readInput() {
-		int shape = 1;
+		shape = 1;
+
 		do {
 
-			int firstEdge = 0;
-			int secondEdge = 0;
-			int thirdEgde = 0;
-			int fourthEdge = 0;
-			int areaCalc = 0;
-			int perimeterSum = 0;
+			firstEdge = 0;
+			secondEdge = 0;
+			thirdEgde = 0;
+			fourthEdge = 0;
+			;
 
-			System.out.println("Lutfen hesaplamak istediginiz seklin (en fazla 4 kenar) "
-					+ "kenar uzunluklarini giriniz (-1 ile cikis): ");
+			System.out.println("\nPlease enter the side lengths of the shape "
+					+ "(max. 4 sides) and (exit with -1): ");
+
 			while (true) {
 				int i = 1;
 
@@ -68,46 +77,53 @@ public class ShapeTest {
 				break;
 
 			}
-
+			
 			if ((secondEdge != 0) && (thirdEgde != 0)) {
 
 				showMenu();
-				System.out.print("\nSecim: ");
-				String operation = scanString();
+				System.out.print("\nSelection: ");
+				this.doOperation(ShapeTest2.scanString());
 
-				switch (operation) {
-
-				case "1":
-					perimeterSum = this.doPerimeterCalc(firstEdge, secondEdge, thirdEgde, fourthEdge);
-					System.out.println(shape + ". Sekilin cevresi:" + perimeterSum);
-					shape++;
-					break;
-
-				case "2":
-					areaCalc = this.doAreaCalc(firstEdge, secondEdge, thirdEgde, fourthEdge);
-					System.out.println(shape + ". Sekilin alani:" + areaCalc);
-					shape++;
-					break;
-
-				case "3":
-					perimeterSum = this.doPerimeterCalc(firstEdge, secondEdge, thirdEgde, fourthEdge);
-					areaCalc = this.doAreaCalc(firstEdge, secondEdge, thirdEgde, fourthEdge);
-					System.out.println(shape + ". Sekilin cevresi:" + perimeterSum);
-					System.out.println(shape + ". Sekilin alani:" + areaCalc);
-					shape++;
-					break;
-
-				default:
-					System.out.println("Wrong input!! Try Again.");
-					break;
-				}
-				
 			} else if (secondEdge == 0) {
-				System.err.println("Tek kenarli sekil olamaz");
+				System.err.println("It cannot be a single sided shape");
 			} else if (thirdEgde == 0) {
-				System.err.println("Iki kenarli sekil olamaz");
+				System.err.println("It cannot be a double-sided shape");
 			}
 		} while (true);
+
+	}
+
+	private void doOperation(String operation) {
+		int areaCalc = 0;
+		int perimeterSum = 0;
+
+		switch (operation) {
+
+		case "1":
+			perimeterSum = this.doPerimeterCalc(firstEdge, secondEdge, thirdEgde, fourthEdge);
+			System.out.println("Circumference of figure "+shape+".: "+ perimeterSum);
+			shape++;
+			break;
+
+		case "2":
+			areaCalc = this.doAreaCalc(firstEdge, secondEdge, thirdEgde, fourthEdge);
+			System.out.println("Area of figure "+shape+".: "+ areaCalc);
+			shape++;
+			break;
+
+		case "3":
+			perimeterSum = this.doPerimeterCalc(firstEdge, secondEdge, thirdEgde, fourthEdge);
+			areaCalc = this.doAreaCalc(firstEdge, secondEdge, thirdEgde, fourthEdge);
+			System.out.println("Circumference of figure "+shape+": "+ perimeterSum);
+			System.out.println("Area of figure "+shape+": "+ areaCalc);
+			shape++;
+			break;
+
+		default:
+			System.out.println("Wrong input!! Try Again.");
+			System.out.print("\nSelection: ");
+			doOperation(ShapeTest2.scanString());
+		}
 
 	}
 
@@ -115,8 +131,7 @@ public class ShapeTest {
 		int areaCalc = 0;
 		if (this.isTriangle(fourthEdge)) {
 			areaCalc = this.calcTriangleArea(firstEdge, secondEdge, thirdEgde);
-		} 
-		else {
+		} else {
 			areaCalc = this.calcTrapezoidalArea(firstEdge, secondEdge, thirdEgde, fourthEdge);
 		}
 		return areaCalc;
@@ -128,9 +143,9 @@ public class ShapeTest {
 	}
 
 	private static void showMenu() {
-		System.out.println("\n1- Cevre");
-		System.out.println("2- Alan");
-		System.out.println("3- Hem Cevre hem Alan");
+		System.out.println("\n1- Circumference");
+		System.out.println("2- Area");
+		System.out.println("3- Circumference and Area");
 	}
 
 	private boolean isTriangle(int fourthEdge) {
@@ -171,7 +186,7 @@ public class ShapeTest {
 	}
 
 	private int scanEdge(int i) {
-		System.out.print("Lutfen " + i + ". kenar uzunlugunu giriniz (0 ile sonlandir): ");
+		System.out.print("Please enter "+i+". side length (end with 0): ");
 		int number = scanInt();
 		return number;
 	}
