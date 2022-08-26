@@ -80,11 +80,13 @@ public class ShapeTest {
 				case "1":
 					perimeterSum = this.doPerimeterCalc(firstEdge, secondEdge, thirdEgde, fourthEdge);
 					System.out.println(shape + ". Sekilin cevresi:" + perimeterSum);
+					shape++;
 					break;
 
 				case "2":
 					areaCalc = this.doAreaCalc(firstEdge, secondEdge, thirdEgde, fourthEdge);
 					System.out.println(shape + ". Sekilin alani:" + areaCalc);
+					shape++;
 					break;
 
 				case "3":
@@ -92,6 +94,7 @@ public class ShapeTest {
 					areaCalc = this.doAreaCalc(firstEdge, secondEdge, thirdEgde, fourthEdge);
 					System.out.println(shape + ". Sekilin cevresi:" + perimeterSum);
 					System.out.println(shape + ". Sekilin alani:" + areaCalc);
+					shape++;
 					break;
 
 				default:
@@ -104,7 +107,6 @@ public class ShapeTest {
 			} else if (thirdEgde == 0) {
 				System.err.println("Iki kenarli sekil olamaz");
 			}
-			shape++;
 		} while (true);
 
 	}
